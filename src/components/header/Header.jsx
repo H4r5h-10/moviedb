@@ -14,7 +14,6 @@ export const Header = () => {
   const {isAuthenticated, setIsAuthenticated} = useContext(Context);
   const [progress, setProgress] = useState(0);
   console.log(progress);
-  const token = cookie.load("token");
   const logoutHandler = async () =>{
     await axios.get(`${server}/users/logout`, {
       headers: {
@@ -22,6 +21,7 @@ export const Header = () => {
       },
       withCredentials: true,
     });
+    cookie.remove('token');
     toast("Logged Out", {
       autoClose: 1000,
       closeOnClick: false,
