@@ -38,7 +38,7 @@ const Login = () => {
     );
     if (data.success) {
       // Set the cookie
-      Cookies.save('token', data.token, {
+      Cookies.set('token', data.token, {
         path: '/',
         maxAge: 2 * 24 * 60 * 60, // 2 days
         sameSite: 'none',

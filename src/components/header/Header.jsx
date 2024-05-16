@@ -13,7 +13,7 @@ export const Header = () => {
   const {isAuthenticated, setIsAuthenticated} = useContext(Context);
   const [progress, setProgress] = useState(0);
   console.log(progress);
-
+  const token = Cookies.get("token");
   const logoutHandler = async () =>{
     await axios.get(`${server}/users/logout`, {
       headers: {

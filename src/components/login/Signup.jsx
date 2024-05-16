@@ -32,7 +32,17 @@ const Signup = () => {
       },
       { withCredentials: true }
     );
-    if(data.success) setIsAuthenticated(true);
+    if (data.success) {
+      // Set the cookie
+      Cookies.set('token', data.token, {
+        path: '/',
+        maxAge: 2 * 24 * 60 * 60, // 2 days
+        sameSite: 'none',
+        secure: true,
+        httpOnly: false, // Should be true if setting the cookie from the server
+      });
+      setIsAuthenticated(true);
+    }
     // console.log(data);
     toast(`${data.message}`, {
       autoClose: 1000,

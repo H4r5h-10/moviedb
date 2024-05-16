@@ -15,7 +15,7 @@ export const Watchlist = () => {
   console.log(progress);
   const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } =
     useContext(Context);
-  const token = Cookies.load("token");
+  const token = Cookies.get("token");
   useEffect(() => {
     axios
       .get(`${server}/movies/watchlist`, {

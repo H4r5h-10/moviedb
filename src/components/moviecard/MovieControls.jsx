@@ -9,11 +9,19 @@ import { toast } from "react-toastify";
 
 export const MovieControls = ({ movie, type }) => {
   const { setRefresh } = useContext(Context);
+  const token = Cookies.get("token");
 
   const changeType = async () => {
-    await axios.put(`${server}/movies/changetype`, { movie, type },
-      {withCredentials: true,
-    });
+    await axios.put(
+      `${server}/movies/changetype`,
+      { movie, type },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+        withCredentials: true,
+      }
+    );
     toast(`Moved to ${type === "watchlist" ? "watched" : "watchlist"}`, {
       autoClose: 1000,
       closeOnClick: false,
@@ -24,7 +32,9 @@ export const MovieControls = ({ movie, type }) => {
   };
   const deleteMovie = async () => {
     await axios.delete(`${server}/movies/deletemovie`, {
-      data: { movie },
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
       withCredentials: true,
     });
     toast(`Movie Deleted`, {
@@ -41,10 +51,9 @@ export const MovieControls = ({ movie, type }) => {
         <button
           className="ctrl-btn"
           onClick={() => changeType()}
-          title={type==='watchlist'?"Mark as Watched":"Move to Watchlist"}
+          title={type === "watchlist" ? "Mark as Watched" : "Move to Watchlist"}
         >
-          {type==='watchlist'?<BsEyeFill />:<AiFillEyeInvisible/>}
-          
+          {type === "watchlist" ? <BsEyeFill /> : <AiFillEyeInvisible />}
         </button>
         <button
           className="ctrl-btn"

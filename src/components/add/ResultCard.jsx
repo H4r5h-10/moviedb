@@ -9,7 +9,7 @@ import { Cookies } from "react-cookie";
 
 export const ResultCard = ({ movie }) => {
   const {isAuthenticated, watched, watchlist, setRefresh } = useContext(Context);
-  const token = Cookies.load('token');
+  const token = Cookies.get("token");
   const addToWatched = async () =>{
     await axios.post(`${server}/movies/addmovie`, {
       movie,

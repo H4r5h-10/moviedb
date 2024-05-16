@@ -13,7 +13,7 @@ export const Watched = () => {
 
   const [progress, setProgress] = useState(0);
   console.log(progress);
-  const token = Cookies.load('token');
+  const token = Cookies.get("token");
   useEffect(() => {
     axios
       .get(`${server}/movies/watched`, {
