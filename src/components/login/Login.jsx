@@ -4,7 +4,7 @@ import { server, Context } from "../../main.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "./signup.css";
 import { Link, Navigate } from "react-router-dom";
-import Cookies from "react-cookie";
+import {Cookies} from "react-cookie";
 // import { HashRouter as Router,  Routes, Route} from 'react-router-dom';
 
 const Login = () => {
