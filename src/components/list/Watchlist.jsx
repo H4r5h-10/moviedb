@@ -7,7 +7,7 @@ import { server, Context } from "../../main.jsx";
 import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 import { Navigate } from "react-router";
-import { Cookies } from "react-cookie";
+import cookies from "react-cookies";
 
 export const Watchlist = () => {
   const [progress, setProgress] = useState(0);
@@ -15,7 +15,7 @@ export const Watchlist = () => {
   console.log(progress);
   const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } =
     useContext(Context);
-  const token = Cookies.get("token");
+  const token = cookies.load("token");
   useEffect(() => {
     axios
       .get(`${server}/movies/watchlist`, {

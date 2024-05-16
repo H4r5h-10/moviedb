@@ -6,10 +6,11 @@ import "./moviecontrol.css";
 import { server, Context } from "../../main.jsx";
 import axios from "axios";
 import { toast } from "react-toastify";
+import cookie from 'react-cookies'
 
 export const MovieControls = ({ movie, type }) => {
   const { setRefresh } = useContext(Context);
-  const token = Cookies.get("token");
+  const token = cookie.load("token");
 
   const changeType = async () => {
     await axios.put(

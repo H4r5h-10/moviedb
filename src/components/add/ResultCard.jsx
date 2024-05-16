@@ -5,11 +5,11 @@ import "react-toastify/dist/ReactToastify.css";
 import { server, Context } from '../../main.jsx';
 import { Navigate } from "react-router";
 import axios from "axios";
-import { Cookies } from "react-cookie";
+import cookie from "react-cookies";
 
 export const ResultCard = ({ movie }) => {
   const {isAuthenticated, watched, watchlist, setRefresh } = useContext(Context);
-  const token = Cookies.get("token");
+  const token = cookie.load("token");
   const addToWatched = async () =>{
     await axios.post(`${server}/movies/addmovie`, {
       movie,

@@ -5,7 +5,7 @@ import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 import { Navigate } from "react-router";
 import { ToastContainer } from "react-toastify";
-import { Cookies } from "react-cookie";
+import cookie from "react-cookies";
 
 export const Watched = () => {
   const { isAuthenticated, refresh, setRefresh, watched, setWatched } =
@@ -13,7 +13,7 @@ export const Watched = () => {
 
   const [progress, setProgress] = useState(0);
   console.log(progress);
-  const token = Cookies.get("token");
+  const token = cookie.load("token");
   useEffect(() => {
     axios
       .get(`${server}/movies/watched`, {

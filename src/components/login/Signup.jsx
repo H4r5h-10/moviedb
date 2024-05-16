@@ -4,6 +4,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "./signup.css";
 import { Link, Navigate } from "react-router-dom";
 import { server, Context } from "../../main.jsx";
+import cookie from 'react-cookies'
 
 const Signup = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
@@ -11,7 +12,7 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  // const [cookies, setCookie] = useCookies(['token']);
   const formSubmit = async (e) => {
     e.preventDefault();
     if(email==="" || password===""){
@@ -34,10 +35,9 @@ const Signup = () => {
     );
     if (data.success) {
       // Set the cookie
-      Cookies.set('token', data.token, {
+      cookie.save('token', data.token, {
         path: '/',
         maxAge: 2 * 24 * 60 * 60, // 2 days
-        sameSite: 'none',
         secure: true,
         httpOnly: false, // Should be true if setting the cookie from the server
       });

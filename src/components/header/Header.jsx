@@ -8,12 +8,13 @@ import LoadingBar from 'react-top-loading-bar';
 import { server, Context } from '../../main.jsx';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import cookie from 'react-cookies'
 
 export const Header = () => {
   const {isAuthenticated, setIsAuthenticated} = useContext(Context);
   const [progress, setProgress] = useState(0);
   console.log(progress);
-  const token = Cookies.get("token");
+  const token = cookie.load("token");
   const logoutHandler = async () =>{
     await axios.get(`${server}/users/logout`, {
       headers: {
