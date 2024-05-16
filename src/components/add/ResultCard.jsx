@@ -86,7 +86,6 @@ export const ResultCard = ({ movie }) => {
           </button>
         </div>}
       </div>
-      <ToastContainer closeButton={false} />
     </div>
   );
 };

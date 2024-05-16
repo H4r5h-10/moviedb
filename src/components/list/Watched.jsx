@@ -4,19 +4,22 @@ import { MovieCard } from "../moviecard/MovieCard";
 import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 import { Navigate } from "react-router";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 export const Watched = () => {
-  const { isAuthenticated, refresh, setRefresh, watched, setWatched } = useContext(Context);
+  const { isAuthenticated, refresh, setRefresh, watched, setWatched } =
+    useContext(Context);
 
   const [progress, setProgress] = useState(0);
   console.log(progress);
 
-
   useEffect(() => {
     axios
-      .get(`${server}/movies/watched`, { withCredentials: true })
-      .then((res) => {setWatched(res.data.data);setRefresh(false);});
+      .get(`${server}/movies/watched`, { withCredentials: true, })
+      .then((res) => {
+        setWatched(res.data.data);
+        setRefresh(false);
+      });
   }, [refresh, setWatched, setRefresh]);
 
   if (!isAuthenticated) return <Navigate to={"/"} />;
@@ -24,7 +27,7 @@ export const Watched = () => {
   return (
     <div>
       <LoadingBar progress={100} onLoaderFinished={() => setProgress(0)} />
-          <ToastContainer className={"toasty"} closeButton="false"/>
+      <ToastContainer className={"toasty"} closeButton="false" />
       <div className="top-container">
         <h1 className="page-head">
           <div className="v-line"></div>Watched Movies
@@ -46,7 +49,6 @@ export const Watched = () => {
           )}
         </div>
       </div>
-
     </div>
   );
 };

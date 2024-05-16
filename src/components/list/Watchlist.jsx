@@ -16,7 +16,7 @@ export const Watchlist = () => {
   
   useEffect(() => {
     axios
-      .get(`${server}/movies/watchlist`, { withCredentials: true })
+      .get(`${server}/movies/watchlist`, { withCredentials: true, })
       .then((res) => {setWatchlist(res.data.data);setRefresh(false);});
   }, [refresh, setRefresh, setWatchlist]);
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ResultCard } from "./ResultCard";
 import LoadingBar from 'react-top-loading-bar';
 import "./add.css";
+import { ToastContainer } from "react-toastify";
 
 export const Add = () => {
   const [movies, setMovies] = useState([]);
@@ -47,6 +48,8 @@ export const Add = () => {
           )}
           </div>
         </div>
+        <ToastContainer />
+
       </div>
   );
 };
