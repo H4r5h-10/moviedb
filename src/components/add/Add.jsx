@@ -14,7 +14,7 @@ export const Add = () => {
     e.preventDefault();
     fetch(
       // `https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_TMDB_KEY}&include_adult=false&query=${e.target.value}`)
-      `https://api.themoviedb.org/3/search/multi?api_key=12737eb0218b6cca5b2303c9865cbcdb&include_adult=false&query=${e.target.value}`)
+      `https://api.themoviedb.org/3/search/multi?api_key=${import.meta.env.VITE_API_KEY}&include_adult=false&query=${e.target.value}`)
       .then((res) => res.json())
       .then((data) => {
         if (!data.error) {
