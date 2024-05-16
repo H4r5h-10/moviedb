@@ -9,10 +9,25 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  /* height: 2vh; */
 }
 
-form {
-  height: 80vh;
+.login-form {
+  height: 30em;
+  width: 30em;
+  background-color: rgba(255, 255, 255, 0.13);
+  position: absolute;
+  transform: translate(-50%, -50%);
+  top: 55%;
+  left: 50%;
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
+  padding: 2em 2em;
+}
+.signup-form {
+  height: 30em;
   width: 30em;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -84,4 +99,9 @@ form h3 {
 }
 .form .links:hover {
   color: black;
+}
+@media only screen and (max-width: 678px){
+  .signup-form{
+    height: 40em;
+  }
 }
