@@ -15,12 +15,6 @@ export const Header = () => {
   const [progress, setProgress] = useState(0);
   console.log(progress);
   const logoutHandler = async () =>{
-    await axios.get(`${server}/users/logout`, {
-      headers: {
-        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
-      },
-      withCredentials: true,
-    });
     cookie.remove('token');
     toast("Logged Out", {
       autoClose: 1000,
