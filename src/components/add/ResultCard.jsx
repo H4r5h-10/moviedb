@@ -5,15 +5,21 @@ import "react-toastify/dist/ReactToastify.css";
 import { server, Context } from '../../main.jsx';
 import { Navigate } from "react-router";
 import axios from "axios";
+import { Cookies } from "react-cookie";
 
 export const ResultCard = ({ movie }) => {
   const {isAuthenticated, watched, watchlist, setRefresh } = useContext(Context);
-  
+  const token = Cookies.load('token');
   const addToWatched = async () =>{
     await axios.post(`${server}/movies/addmovie`, {
       movie,
       movieType: "watched"
-    },{withCredentials: true});
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+      withCredentials: true,
+    });
     toast("Movie Added to Watched", {
       autoClose: 1000,
       closeOnClick: false,
@@ -27,7 +33,12 @@ export const ResultCard = ({ movie }) => {
     await axios.post(`${server}/movies/addmovie`, {
       movie,
       movieType: "watchlist"
-    },{withCredentials: true})
+    },{
+      headers: {
+        Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+      },
+      withCredentials: true,
+    })
     toast("Movie Added to Watchlist", {
       autoClose: 1000,
       closeOnClick: false,

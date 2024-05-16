@@ -4,6 +4,7 @@ import { server, Context } from "../../main.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import "./signup.css";
 import { Link, Navigate } from "react-router-dom";
+import Cookies from "react-cookie";
 // import { HashRouter as Router,  Routes, Route} from 'react-router-dom';
 
 const Login = () => {
@@ -35,14 +36,23 @@ const Login = () => {
         withCredentials: true,
       }
     );
+    if (data.success) {
+      // Set the cookie
+      Cookies.save('token', data.token, {
+        path: '/',
+        maxAge: 2 * 24 * 60 * 60, // 2 days
+        sameSite: 'none',
+        secure: true,
+        httpOnly: false, // Should be true if setting the cookie from the server
+      });
+      setIsAuthenticated(true);
+    }
     toast(`${data.message}`, {
       autoClose: 1000,
       closeOnClick: false,
       pauseOnHover: false,
       theme: "dark",
     });
-    // toast.success(data.message)
-    if(data.success) setIsAuthenticated(true);
   };
   if (isAuthenticated) {
     return <Navigate to={"/"} />;

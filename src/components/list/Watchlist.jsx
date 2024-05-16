@@ -1,23 +1,33 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./watchlist.css";
 import { MovieCard } from "../moviecard/MovieCard.jsx";
-import { ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { RiSearchEyeLine } from "react-icons/ri";
 import { server, Context } from "../../main.jsx";
 import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 import { Navigate } from "react-router";
+import { Cookies } from "react-cookie";
 
 export const Watchlist = () => {
   const [progress, setProgress] = useState(0);
   // const [list , setList] = useState();
   console.log(progress);
-  const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } = useContext(Context);
-  
+  const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } =
+    useContext(Context);
+  const token = Cookies.load("token");
   useEffect(() => {
     axios
-      .get(`${server}/movies/watchlist`, { withCredentials: true, })
-      .then((res) => {setWatchlist(res.data.data);setRefresh(false);});
+      .get(`${server}/movies/watchlist`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+        },
+        withCredentials: true,
+      })
+      .then((res) => {
+        setWatchlist(res.data.data);
+        setRefresh(false);
+      });
   }, [refresh, setRefresh, setWatchlist]);
 
   if (!isAuthenticated) return <Navigate to={"/"} />;
@@ -45,7 +55,7 @@ export const Watchlist = () => {
           </h2>
         )}
       </div>
-      <ToastContainer className={"toasty"} closeButton="false"/>
+      <ToastContainer className={"toasty"} closeButton="false" />
     </div>
   );
 };
