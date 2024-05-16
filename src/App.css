@@ -6,8 +6,9 @@
   box-sizing: border-box;
 }
 body{
-  width: 100%;
+  width: 100vw;
   color: white;
+  margin: 1rem;
   background-image: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),url("/bgmovie.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -59,7 +60,7 @@ body{
 }
 @media only screen and (max-width: 678px){
   body{
-    font-size: 13px;
+    font-size: 3vw;
   }
   .v-line{
     height: 30px;
