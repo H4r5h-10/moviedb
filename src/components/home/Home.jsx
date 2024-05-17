@@ -1,7 +1,12 @@
 import { Link } from "react-router-dom";
+import { Navigate } from "react-router";
+import {useContext } from "react";
 import './home.css'
+import { Context } from "../../main.jsx";
 
 function HomePage() {
+  const {isAuthenticated } = useContext(Context);
+  if (isAuthenticated) return <Navigate to={"/watchlist"} />;
   return (
     <div>
       <div className="landing-frame">
