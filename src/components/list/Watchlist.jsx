@@ -8,6 +8,7 @@ import LoadingBar from "react-top-loading-bar";
 import axios from "axios";
 import { Navigate } from "react-router";
 import cookies from "react-cookies";
+import Header from "../header/Header.jsx";
 
 export const Watchlist = () => {
   const [progress, setProgress] = useState(0);
@@ -16,6 +17,7 @@ export const Watchlist = () => {
   const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } =
     useContext(Context);
   const token = cookies.load("token");
+  if (!isAuthenticated) return <Navigate to={"/"} />;
   useEffect(() => {
     axios
       .get(`${server}/movies/watchlist`, {
@@ -30,10 +32,12 @@ export const Watchlist = () => {
       });
   }, [refresh, setRefresh, setWatchlist]);
 
-  if (!isAuthenticated) return <Navigate to={"/"} />;
+ 
 
   return (
-    <div className="top-container">
+    <div>
+      <Header/>
+      <div className="top-container">
       <LoadingBar progress={100} onLoaderFinished={() => setProgress(0)} />
       <h1 className="page-head">
         <div className="v-line"></div>My Watchlist
@@ -56,6 +60,7 @@ export const Watchlist = () => {
         )}
       </div>
       <ToastContainer className={"toasty"} closeButton="false" />
+    </div>
     </div>
   );
 };
