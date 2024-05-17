@@ -2,14 +2,17 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { createContext } from "react";
+import cookie from 'react-cookies'
 
 export const server = "https://movie-server-beta.vercel.app";
 // export const server = "http://localhost:4000";
+const token = cookie.load('token')
+const temp = token?true:false;
 
-export const Context = createContext({ isAuthenticated: false });
+export const Context = createContext({ isAuthenticated: temp});
 
 const AppWrapper = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(temp);
   const [watchlist, setWatchlist] = useState([]);
   const [refresh, setRefresh] = useState(false);
   const [watched, setWatched] = useState([]);
