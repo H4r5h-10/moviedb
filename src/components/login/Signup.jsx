@@ -52,7 +52,7 @@ const Signup = () => {
     });
   };
 
-  if (isAuthenticated) return <Navigate to={"/"} />;
+  if (isAuthenticated) return <Navigate to={"/watchlist"} />;
 
   return (
     <div className="form-container">
