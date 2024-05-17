@@ -17,12 +17,12 @@ function HomePage() {
           Browse, bookmark, and curate your movie journey with MovieMeter's personalized watchlist.
           </div>
           <br />
-          <button className="btn">
-            <Link className="links" to="/signup">Sign Up</Link>
-          </button>
-          <button className="btn">
-          <Link className="links" to="/login">Log In</Link>
-          </button>
+          
+            <Link className="links" to="/signup"><button className="btn">Sign Up</button></Link>
+          
+          
+          <Link className="links" to="/login"><button className="btn">Log In</button></Link>
+          
             
         </div>
       </div>
