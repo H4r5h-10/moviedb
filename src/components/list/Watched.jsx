@@ -6,6 +6,7 @@ import axios from "axios";
 import { Navigate } from "react-router";
 import { ToastContainer } from "react-toastify";
 import cookie from "react-cookies";
+import Header from "../header/Header.jsx";
 
 export const Watched = () => {
   const { isAuthenticated, refresh, setRefresh, watched, setWatched } =
@@ -14,6 +15,7 @@ export const Watched = () => {
   const [progress, setProgress] = useState(0);
   console.log(progress);
   const token = cookie.load("token");
+  if (!isAuthenticated) return <Navigate to={"/"} />;
   useEffect(() => {
     axios
       .get(`${server}/movies/watched`, {
@@ -28,9 +30,11 @@ export const Watched = () => {
       });
   }, [refresh, setWatched, setRefresh]);
 
-  if (!isAuthenticated) return <Navigate to={"/"} />;
+  
 
   return (
+   <div>
+    <Header/>
     <div>
       <LoadingBar progress={100} onLoaderFinished={() => setProgress(0)} />
       <ToastContainer className={"toasty"} closeButton="false" />
@@ -56,6 +60,7 @@ export const Watched = () => {
         </div>
       </div>
     </div>
+   </div>
   );
 };
 
