@@ -34,7 +34,7 @@ export const Header = () => {
         <h3><ImVideoCamera/>MovieMeter</h3>
         <LoadingBar progress={100} onLoaderFinished={() => setProgress(0)}/>
         <nav ref={navRef}>
-            <Link className= "links" to='/' onClick={showNavbar}>
+            <Link className= "links" to='/watchlist' onClick={showNavbar}>
               Watchlist
             </Link>
             <Link className= "links" to='/watched' onClick={showNavbar}>Watched</Link>
