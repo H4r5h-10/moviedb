@@ -37,6 +37,9 @@ export const MovieControls = ({ movie, type }) => {
         Authorization: `Bearer ${token}`, // Include the token in the Authorization header
       },
       withCredentials: true,
+      data: {
+        movie: movie
+      }
     });
     toast(`Movie Deleted`, {
       autoClose: 1000,
