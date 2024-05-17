@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { ResultCard } from "./ResultCard";
 import LoadingBar from 'react-top-loading-bar';
 import "./add.css";
 import { ToastContainer } from "react-toastify";
+import Header from "../header/Header";
+import { Navigate } from "react-router";
+
+import { Context } from "../../main.jsx";
 
 export const Add = () => {
+
   const [movies, setMovies] = useState([]);
   const [progress, setProgress] = useState(0);
+  const {isAuthenticated } = useContext(Context);
   console.log(progress);
-
+  if (!isAuthenticated) return <Navigate to={"/"} />;
 
   const onchange = (e) => {
     e.preventDefault();
@@ -26,7 +32,9 @@ export const Add = () => {
   };
 
   return (
-    <div className="add-page">
+    <div>
+      <Header/>
+      <div className="add-page">
       <LoadingBar progress={100} onLoaderFinished={() => setProgress(0)}/>
         <div className="add-content">
           <div className="input-wrapper">
@@ -51,6 +59,7 @@ export const Add = () => {
         <ToastContainer />
 
       </div>
+    </div>
   );
 };
 
