@@ -9,10 +9,12 @@ import axios from "axios";
 import { Navigate } from "react-router";
 import cookies from "react-cookies";
 import Header from "../header/Header.jsx";
+import Loader from '../loader/Loader.jsx';
 
 export const Watchlist = () => {
   const [progress, setProgress] = useState(0);
-  // const [list , setList] = useState();
+  const [loading , setLoading] = useState(true);
+
   console.log(progress);
   const { isAuthenticated, refresh, setRefresh, setWatchlist, watchlist } =
     useContext(Context);
@@ -22,13 +24,14 @@ export const Watchlist = () => {
     axios
       .get(`${server}/movies/watchlist`, {
         headers: {
-          Authorization: `Bearer ${token}`, // Include the token in the Authorization header
+          Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
       })
       .then((res) => {
         setWatchlist(res.data.data);
         setRefresh(false);
+        setLoading(false);
       });
   }, [refresh, setRefresh, setWatchlist]);
 
@@ -54,9 +57,9 @@ export const Watchlist = () => {
             ))}
           </div>
         ) : (
-          <h2 className="no">
-            Add movies by clicking <RiSearchEyeLine />
-          </h2>
+          <div>
+           {loading?<Loader/>:<h2 className="no">Add movies by clicking <RiSearchEyeLine /></h2>}
+           </div>
         )}
       </div>
       <ToastContainer className={"toasty"} closeButton="false" />
