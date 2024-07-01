@@ -9,11 +9,11 @@ form {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 2vh; */
+  padding: 1em;
 }
 
 .login-form {
-  height: 30em;
+  /* height: 30em; */
   width: 30em;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -24,10 +24,10 @@ form {
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 2em 2em;
+  padding: 1em 2em;
 }
 .signup-form {
-  height: 30em;
+  /* height: 30em; */
   width: 30em;
   background-color: rgba(255, 255, 255, 0.13);
   position: absolute;
@@ -38,7 +38,7 @@ form {
   backdrop-filter: blur(10px);
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-  padding: 2em 2em;
+  padding: 1em 2em;
 }
 form * {
   /* font-family: 'Poppins',sans-serif; */
@@ -89,7 +89,7 @@ form h3 {
 .button-submit {
   display: flex;
   flex-direction: column;
-  gap: 0.2em;
+  gap: 1em;
   justify-content: center;
   align-items: center;
 }
@@ -100,8 +100,8 @@ form h3 {
 .form .links:hover {
   color: black;
 }
-@media only screen and (max-width: 678px){
-  .signup-form{
-    height: 40em;
-  }
+.transition-signup{
+  position: fixed;
+  top: 64%;
+  left: 47%;
 }
