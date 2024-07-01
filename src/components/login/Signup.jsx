@@ -5,17 +5,17 @@ import "./signup.css";
 import { Link, Navigate } from "react-router-dom";
 import { server, Context } from "../../main.jsx";
 import cookie from 'react-cookies'
+import Loader from "../loader/Loader.jsx";
 
 const Signup = () => {
   const { isAuthenticated, setIsAuthenticated } = useContext(Context);
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [cookies, setCookie] = useCookies(['token']);
+  const [loading, setLoading] = useState(false);
   const formSubmit = async (e) => {
     e.preventDefault();
-    if(email==="" || password===""){
+    if(name==="" || email==="" || password===""){
       toast(`Enter the details first!`, {
         autoClose: 1000,
         closeOnClick: false,
@@ -24,6 +24,7 @@ const Signup = () => {
       });
       return ;
     }
+    else setLoading(true);
     const {data} = await axios.post(
       `${server}/users/register`,
       {
@@ -39,11 +40,14 @@ const Signup = () => {
         path: '/',
         maxAge: 2 * 24 * 60 * 60, // 2 days
         secure: true,
-        httpOnly: false, // Should be true if setting the cookie from the server
+        httpOnly: false, 
       });
       setIsAuthenticated(true);
     }
     // console.log(data);
+    if(!isAuthenticated){
+      setLoading(false);
+    }
     toast(`${data.message}`, {
       autoClose: 1000,
       closeOnClick: false,
@@ -55,12 +59,14 @@ const Signup = () => {
   if (isAuthenticated) return <Navigate to={"/watchlist"} />;
 
   return (
-    <div className="form-container">
+    <>
+    {loading?(
+      <div>
+        <Loader/>
+        <div className="transition-signup"><h2>Please wait...</h2></div>
+      </div>
+    ):(<div className="form-container">
       <form action="post" className="signup-form form" onSubmit={formSubmit}>
-        {/* <input type="text" placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
-      <input type="email" placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)} />
-      <input type="password" placeholder="Password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-      <button className="form-button" type="submit">Submit</button> */}
         <h3>Sign Up</h3>
 
         <label >Name</label>
@@ -74,13 +80,13 @@ const Signup = () => {
 
         <div className="button-submit">
         <button type="submit">Register</button>
-        {/* <button type="submit">Register</button> */}
 
  <Link className="links" to="/login"><button>Log In</button></Link>
         </div>
       </form>
       <ToastContainer closeButton="false" />
-    </div>
+    </div>)}
+    </>
   );
 };
 
