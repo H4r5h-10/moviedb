@@ -18,10 +18,12 @@ function HomePage() {
           </div>
           <br />
           
-            <Link className="links" to="/signup"><button className="btn">Sign Up</button></Link>
+          <div className="btn-wrapper">
+          <Link className="links" to="/signup"><button className="btn">Sign Up</button></Link>
           
           
           <Link className="links" to="/login"><button className="btn">Log In</button></Link>
+          </div>
           
             
         </div>
