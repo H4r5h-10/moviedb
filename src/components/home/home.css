@@ -11,6 +11,11 @@
 .legend-body{
   font-size: 2em;
 }
+.btn-wrapper{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
 .btn{
     /* margin-top: 50px; */
     width: 10em;
